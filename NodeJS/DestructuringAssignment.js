@@ -32,3 +32,12 @@ const {
 } = candyMachine2;
 candyMachine2.getCandy2();
 console.log(candyMachine2.status.count2); //4
+
+var array = ["nodejs", {}, 10, true];
+var node = array[0]; // node = 'nodejs'
+var obj = array[1]; // obj = {}
+var bool = array[3]; // bool = true
+
+var array2 = ["nodejs", {}, 10, true];
+const [node2, obj2, , bool2] = array2;
+// node2 = 'nodejs', obj2 = {}, bool2 = true
