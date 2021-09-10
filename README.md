@@ -6,5 +6,5 @@
 ## JavaScript
 
 ## Node.js
-[링크드리스트](https://github.com/Tozinoo/Studying/blob/main/NodeJS/SLL.js)
+#1 [링크드리스트](https://github.com/Tozinoo/Studying/blob/main/NodeJS/SLL.js)
 ## ex
