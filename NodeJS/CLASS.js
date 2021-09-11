@@ -37,8 +37,6 @@
 //     }
 // }
 
-
-
 // class Zero {
 //     constructor(type, firstName, lastName) {
 //         Human.apply(this, arguments);
@@ -56,29 +54,29 @@
 // console.log(Human.isHuman(oldZero)); //true
 // oldZero.sayName();
 
-class Human{
-    constructor(type='human'){
+class Human {
+    constructor(type = "human") {
         this.type = type;
     }
-    static isHuman(human){
+    static isHuman(human) {
         return human instanceof Human;
     }
-    breathe(){
-        alert('h-a-a-a-m');
+    breathe() {
+        alert("h-a-a-a-m");
     }
 }
 
 class Zero extends Human {
-    constructor(type, firstName, lastName){
+    constructor(type, firstName, lastName) {
         super(type);
         this.firstName = firstName;
         this.lastName = lastName;
     }
-    sayName(){
+    sayName() {
         super.breathe();
         alert(`${this.firstName} ${this.lastName}`);
     }
 }
 
-const newZero = new Zero('human', 'zero', 'cho');
+const newZero = new Zero("human", "zero", "cho");
 Human.isHuman(newZero); //true
