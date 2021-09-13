@@ -12,6 +12,8 @@
 #2 [구조분해할당](https://github.com/Tozinoo/Studying/blob/main/NodeJS/DestructuringAssignment.js)  
 #3 [클래스](https://github.com/Tozinoo/Studying/blob/main/NodeJS/CLASS.js)  
 #4 [프로미스](https://github.com/Tozinoo/Studying/blob/main/NodeJS/Promiss.js)  
-#5 [콜백->프로미스](https://github.com/Tozinoo/Studying/blob/main/NodeJS/callbackTOpromiss.js)
+#5 [콜백->프로미스](https://github.com/Tozinoo/Studying/blob/main/NodeJS/callbackTOpromiss.js)  
+#6 [KMP 문자열 검색 알고리즘](https://github.com/Tozinoo/Studying/blob/main/NodeJS/KMP.js)  
+#7 [이벤트 리스너](https://github.com/Tozinoo/Studying/blob/main/NodeJS/eventListener.js)
 
 ## ex
