@@ -1,6 +1,22 @@
-function run() {
-    console.log("3초후 실행");
+// function run() {
+//     console.log("3초후 실행");
+// }
+// console.log("시작");
+// setTimeout(run, 3000);
+// console.log("끝");
+
+function oneMore() {
+    console.log("one more");
 }
-console.log("시작");
+function run() {
+    console.log("run run");
+    setTimeout(() => {
+        console.log("wow");
+    }, 0);
+    new Promise((resolve) => {
+        resolve("hi");
+    }).then(console.log);
+    oneMore();
+}
+
 setTimeout(run, 3000);
-console.log("끝");
