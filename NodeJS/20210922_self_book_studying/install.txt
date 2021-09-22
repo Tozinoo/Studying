@@ -1,3 +1,0 @@
-npm i express
-npm i mysql
-npm i ejs
