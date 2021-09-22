@@ -15,6 +15,7 @@
 #5 [콜백->프로미스](https://github.com/Tozinoo/Studying/blob/main/NodeJS/callbackTOpromiss.js)  
 #6 [KMP 문자열 검색 알고리즘](https://github.com/Tozinoo/Studying/blob/main/NodeJS/KMP.js)  
 #7 [이벤트 리스너](https://github.com/Tozinoo/Studying/blob/main/NodeJS/eventListener.js)  
-#8 [express-middleware](https://github.com/Tozinoo/Studying/blob/main/NodeJS/20210915_academy/app.js)
+#8 [express-middleware](https://github.com/Tozinoo/Studying/blob/main/NodeJS/20210915_academy/app.js)  
+#9 [mysql연동](https://github.com/Tozinoo/Studying/blob/main/NodeJS/20210922_self_book_studying/app.js)
 
 ## ex
