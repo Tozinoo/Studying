@@ -1,0 +1,19 @@
+{
+    "name": "20210924_academy_1",
+    "version": "0.0.1",
+    "description": "",
+    "main": "app.js",
+    "homepage": ".",
+    "scripts": {
+        "test": "echo \"Error: no test specified\" && exit 1",
+        "start": "nodemon app"
+    },
+    "author": "",
+    "license": "ISC",
+    "dependencies": {
+        "socket.io": "^1.7.4"
+    },
+    "devDependencies": {
+        "nodemon": "^2.0.13"
+    }
+}
