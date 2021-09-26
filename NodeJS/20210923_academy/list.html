@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>리스트</title>
+    </head>
+    <body>
+        <h1>리스트 페이지</h1>
+        <a href="/insert">삽입 데이터</a>
+        <hr />
+        <table width="100%" border="1">
+            <tr>
+                <th>삭제</th>
+                <th>수정</th>
+                <th>물품이름</th>
+                <th>가격</th>
+                <th>만든날짜</th>
+                <th>회사</th>
+                <th>갯수</th>
+            </tr>
+            <% data.forEach(function (item,index){ %>
+            <tr>
+                <td><a href="/delete/<%= item.productName %> ">삭제</a></td>
+                <td><a href="/edit/<%= item.productName %> ">수정</a></td>
+                <td><%= item.productName %></td>
+                <td><%= item.cost %></td>
+                <td><%= item.makeDate %></td>
+                <td><%= item.company %></td>
+                <td><%= item.amount %></td>
+            </tr>
+            <% }); %>
+        </table>
+    </body>
+</html>

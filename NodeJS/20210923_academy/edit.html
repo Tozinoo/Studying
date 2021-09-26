@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Document</title>
+        <script src="//code.jquery.com/jquery.min.js"></script>
+    </head>
+    <body>
+        <h1>수정페이지</h1>
+        <hr />
+        <form method="POST">
+            <fieldset>
+                <legend>수정데이터</legend>
+                <table>
+                    <tr>
+                        <td><label>물품이름</label></td>
+                        <td>
+                            <input
+                                type="text"
+                                name="productName"
+                                value="<%= data.productName %>"
+                                disabled
+                            />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td><label>가격</label></td>
+                        <td>
+                            <input
+                                type="text"
+                                name="cost"
+                                value="<%= data.cost %>"
+                            />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td><label>회사</label></td>
+                        <td>
+                            <input
+                                type="text"
+                                name="company"
+                                value="<%= data.company %>"
+                            />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td><label>갯수</label></td>
+                        <td>
+                            <input
+                                id="amountt"
+                                type="text"
+                                name="amount"
+                                value="<%= data.amount %>"
+                            />
+                            <button type="button" id="plus">+</button>
+                            <button type="button" id="minus">-</button>
+                        </td>
+                    </tr>
+                </table>
+                <input type="submit" />
+            </fieldset>
+        </form>
+        <script>
+            $("#plus").click(function () {
+                let $input = $(this).parent().find("#amountt");
+                let count = parseInt($input.val()) + 1;
+                $input.val(count);
+                $input.change();
+            });
+            $("#minus").click(function () {
+                let $input = $(this).parent().find("#amountt");
+                let count = parseInt($input.val()) - 1;
+                count = count < 1 ? 1 : count;
+                $input.val(count);
+                $input.change();
+            });
+        </script>
+    </body>
+</html>

@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Document</title>
+        <script src="/socket.io/socket.io.js"></script>
+    </head>
+    <body>
+        <input type="text" id="text" />
+        <input type="button" id="button" value="echo" />
+        <script>
+            window.onload = () => {
+                // 소켓 연결
+                const socket = io.connect();
+                // 소켓 이벤트를 연결
+                socket.on("smart", (data) => {
+                    alert(data);
+                });
+
+                document.getElementById("button").onclick = () => {
+                    let text = document.getElementById("text").value;
+
+                    // 데이터 전송
+                    socket.emit("rint", text);
+                };
+            };
+        </script>
+    </body>
+</html>
