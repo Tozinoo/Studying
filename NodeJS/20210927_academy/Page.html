@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Document</title>
+        <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+        <script src="/socket.io/socket.io.js"></script>
+        <style>
+            .line {
+                overflow: hidden;
+            }
+            .seat {
+                margin: 2px;
+                float: left;
+                width: 30px;
+                height: 30px;
+                border-radius: 3px;
+            }
+            .enable {
+                background: gray;
+            }
+            .enable:hover {
+                background: black;
+            }
+            .disable {
+                background: red;
+            }
+        </style>
+        <!-- 소켓 -->
+        <script>
+            // 소켓 이벤트 수행
+            const socket = io.connect();
+
+            // 이벤트 연결
+            socket.on("reserve", (data) => {
+                let $target = $(
+                    "div[data-x = " + data.x + "][data-y= " + data.y + "]"
+                );
+                $target.removeClass("enable");
+                $target.addClass("disable");
+            });
+        </script>
+        <!-- 초기 좌석 생성 -->
+        <script>
+            $(document).ready(() => {
+                const onClickSeat = function () {
+                    // 좌석을 클릭하면 이벤트가 발생한 좌석의 data-x, data-y 속성값을 추출해 서버에 전송
+                    let x = $(this).attr("data-x");
+                    let y = $(this).attr("data-y");
+                    if (confirm("좌석을 예약 하시겠습니까?")) {
+                        $(this).off("click");
+                        socket.emit("reserve", {
+                            x: x,
+                            y: y,
+                        });
+                    } else {
+                        alert("취소 되었음");
+                    }
+                };
+                // AJAX수행
+                // 더미 객체를 서버에 전달한 이유는? -> IE때문에
+                // IE는 같은 url에 연속적으로 요청이 발생되면 이전에 불러온 데이터를 제공할 가능성이 있음
+                // 현재 시간을 기반으로 URL을 매번 다른 형태로 전달
+                $.getJSON("/seats", { dummy: new Date().getTime() }, (data) => {
+                    // 좌성 생성
+                    $.each(data, (indexY, line) => {
+                        let $line = $("<div></div>").addClass("line");
+                        $.each(line, (indexX, seat) => {
+                            // 문서 객체를 생성하고 변수 line에 추가
+                            let $output = $("<div></div>", {
+                                class: "seat",
+
+                                //data-x와 data-y속성을 사용한 이유는 이벤트가 발생했을 때 선택한 좌석 위치 정보를 알아내기 위해
+                                "data-x": indexX,
+                                "data-y": indexY,
+                            }).appendTo($line);
+                            if (seat == 1) {
+                                $output
+                                    .addClass("enable")
+                                    .on("click", onClickSeat);
+                            } else if (seat == 2) {
+                                $output.addClass("disable");
+                            }
+                        });
+                        $line.appendTo("body");
+                    });
+                });
+            });
+        </script>
+    </head>
+    <body></body>
+</html>
