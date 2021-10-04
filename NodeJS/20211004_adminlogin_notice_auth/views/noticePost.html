@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=], initial-scale=1.0" />
+        <title>Document</title>
+    </head>
+    <body>
+        {% if admin and admin.adminId %}
+        <form method="POST">
+            <table>
+                <tr>
+                    <td>
+                        <input
+                            type="text"
+                            name="title"
+                            placeholder="제목을 입력하세요."
+                        />
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <textarea
+                            name="contents"
+                            id="contents"
+                            cols="30"
+                            rows="10"
+                            style="resize: none"
+                        ></textarea>
+                    </td>
+                </tr>
+            </table>
+            <input type="submit" value="등록하기" />
+            <a href="/notice">돌아가기</a>
+            {% else %}
+            <a href="/notice">돌아가기</a>
+            {% endif %}
+        </form>
+    </body>
+</html>

@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Document</title>
+    </head>
+    <body>
+        {% block noticetable %}
+        <table>
+            {% for notice in notice %}
+            <tr>
+                <td>제목 : {{notice.noticeTitle}}</td>
+            </tr>
+            <tr>
+                <td>내용 : {{notice.noticeContent}}</td>
+            </tr>
+        </table>
+        <a href="/notice/">돌아가기</a>
+        {% if admin and admin.adminId %}
+        <button onclick="location.href='/notice/{{notice.noticeNum}}/edit'">
+            수정하기
+        </button>
+        <button onclick="location.href='/notice/{{notice.noticeNum}}/delete'">
+            삭제하기
+        </button>
+        {% endif %} {% endfor %} {% endblock %}
+    </body>
+</html>

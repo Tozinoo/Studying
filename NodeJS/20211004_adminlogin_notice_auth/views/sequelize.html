@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8" />
+        <title>시퀄라이즈 서버</title>
+        <style>
+            table {
+                border: 1px solid black;
+                border-collapse: collapse;
+            }
+            table th,
+            table td {
+                border: 1px solid black;
+            }
+        </style>
+    </head>
+    <body>
+        <div>
+            <form id="user-form">
+                <fieldset>
+                    <legend>사용자 등록</legend>
+                    <div>
+                        <input
+                            id="userId"
+                            type="text"
+                            placeholder="사용자 아이디"
+                        />
+                    </div>
+                    <div>
+                        <input id="userName" type="text" placeholder="이름" />
+                    </div>
+                    <div>
+                        <input
+                            id="userTel"
+                            type="text"
+                            placeholder="전화번호"
+                        />
+                    </div>
+                    <div>
+                        <input id="userMail" type="text" placeholder="메일" />
+                    </div>
+                    <button type="submit">등록</button>
+                </fieldset>
+            </form>
+        </div>
+
+        <br />
+        <table id="user-list">
+            <thead>
+                <tr>
+                    <th>아이디</th>
+                    <th>이름</th>
+                    <th>전화번호</th>
+                    <th>메일</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for user in users %}
+                <tr>
+                    <td>{{user.userId}}</td>
+                    <td>{{user.userName}}</td>
+                    <td>{{user.userTel}}</td>
+                    <td>{{user.Mail}}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        <br />
+        <div>
+            <form id="class-form">
+                <fieldset>
+                    <legend>클래스 등록</legend>
+                    <div>
+                        <input
+                            id="userId"
+                            type="text"
+                            placeholder="사용자 아이디"
+                        />
+                    </div>
+                    <div>
+                        <input id="classTitle" type="text" placeholder="제목" />
+                    </div>
+                    <div>
+                        <input id="classAddr" type="text" placeholder="주소" />
+                    </div>
+                    <div>
+                        <input id="classPrice" type="text" placeholder="가격" />
+                    </div>
+                    <div>
+                        <input
+                            id="classQty"
+                            type="number"
+                            placeholder="최대 인원"
+                            min="1"
+                        />
+                    </div>
+                    <div>
+                        <input
+                            id="classContent"
+                            type="text"
+                            placeholder="설명"
+                        />
+                    </div>
+                    <button type="submit">등록</button>
+                </fieldset>
+            </form>
+        </div>
+        <br />
+        <table id="classes-list">
+            <thead>
+                <tr>
+                    <th>사용자 아이디</th>
+                    <th>제목</th>
+                    <th>주소</th>
+                    <th>가격</th>
+                    <th>인원</th>
+                    <th>설명</th>
+                    <th>수정</th>
+                    <th>삭제</th>
+                </tr>
+            </thead>
+            <tbody></tbody>
+        </table>
+        <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+        <script src="/sequelize.js"></script>
+    </body>
+</html>
