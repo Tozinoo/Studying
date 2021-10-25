@@ -1,0 +1,46 @@
+// $red: #ff0000;
+// $yellow: yellow;
+// $orange: orange;
+// $green: green;
+// $black: black;
+
+// @mixin square($size) {
+//     $cal: 32px * $size;
+//     width: $cal;
+//     height: $cal;
+// }
+
+@import "./styles/utils.scss";
+
+.ScssComponent {
+    display: flex;
+    .box {
+        background: red;
+        cursor: pointer;
+        transition: all 1s ease-in;
+
+        &.red {
+            background: $red;
+            @include square(1);
+        }
+        &.yellow {
+            background: $yellow;
+            @include square(2);
+        }
+        &.orange {
+            background: $orange;
+            @include square(3);
+        }
+        &.green {
+            background: $green;
+            @include square(4);
+        }
+        &.black {
+            background: $black;
+            @include square(5);
+        }
+        &:hover {
+            background: aqua;
+        }
+    }
+}

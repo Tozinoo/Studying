@@ -1,0 +1,17 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+$red: #ff0000;
+$yellow: yellow;
+$orange: orange;
+$green: green;
+$black: black;
+
+@mixin square($size) {
+    $cal: 32px * $size;
+    width: $cal;
+    height: $cal;
+}

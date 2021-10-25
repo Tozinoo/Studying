@@ -1,0 +1,33 @@
+@import "../styles/utils.scss";
+
+.LoginComponent {
+    margin: 20px auto;
+    width: 50%;
+    min-width: 300px;
+    max-width: 400px;
+    height: 100%;
+    background-color: #ddd;
+    .login-title {
+        font-size: 30px;
+        font-weight: bold;
+        padding: 30px;
+        text-align: center;
+        background-color: red;
+    }
+    .login-form {
+        background-color: blue;
+
+        .login-sub {
+            display: inline-block;
+            width: 100px;
+            background-color: blueviolet;
+        }
+
+        .login-input {
+            width: 300px;
+        }
+    }
+    .login-btn {
+        text-align: center;
+    }
+}
