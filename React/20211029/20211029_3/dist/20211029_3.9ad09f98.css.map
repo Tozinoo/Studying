@@ -1,0 +1,1 @@
+{"version":3,"sources":["index.css"],"names":[],"mappings":"AAAA;AACA;AACA;AACA;AACA;AACA;AACA;AACA;AACA;AACA","file":"20211029_3.9ad09f98.css","sourceRoot":"..","sourcesContent":[".toggle {\r\n    width: 100px;\r\n    height: 100px;\r\n    border: 1px solid black;\r\n    box-sizing: border-box;\r\n}\r\n.active {\r\n    background-color: black;\r\n}\r\n"]}

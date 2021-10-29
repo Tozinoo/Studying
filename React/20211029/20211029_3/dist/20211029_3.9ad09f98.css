@@ -1,0 +1,12 @@
+.toggle {
+    width: 100px;
+    height: 100px;
+    border: 1px solid black;
+    box-sizing: border-box;
+}
+.active {
+    background-color: black;
+}
+
+
+/*# sourceMappingURL=/20211029_3.9ad09f98.css.map */
