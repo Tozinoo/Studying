@@ -3,9 +3,14 @@ import React from "react";
 const TodoComponent = ({ todo, toggle, remove }) => {
     return (
         <div>
-            <input type="checkbox" />
+            <input
+                type="checkbox"
+                onClick={() => toggle(todo.num)}
+                //checked={todo.done}
+                readOnly={true}
+            />
             <span>경일게임</span>
-            <button>클릭</button>
+            <button onClick={() => remove(todo.num)}>클릭</button>
         </div>
     );
 };

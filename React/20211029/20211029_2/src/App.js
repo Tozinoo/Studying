@@ -1,14 +1,16 @@
-import "./App.css";
+import React from "react";
 import NumberCounter from "./components/NumberCounter";
 import Todo from "./components/TodoComponent";
+import CounterContainer from "./containers/counterContainer";
+import TodosContainers from "./containers/TodosContainers";
 
-function App() {
+const App = () => {
     return (
         <div>
-            <NumberCounter number={0} />
-            <Todo />
+            <CounterContainer />
+            <TodosContainers />
         </div>
     );
-}
+};
 
 export default App;

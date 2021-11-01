@@ -5,8 +5,8 @@ const NumberCounter = ({ number, increase, decrease }) => {
         <div>
             <h3>{number}</h3>
             <div>
-                <button onClick={increase}>버튼</button>
-                <button onClick={decrease}>버튼</button>
+                <button onClick={increase}>더</button>
+                <button onClick={decrease}>빼</button>
             </div>
         </div>
     );
