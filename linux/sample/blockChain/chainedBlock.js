@@ -27,6 +27,7 @@ function getVersion() {
 }
 
 //getVersion()
+asdf
 
 function createGenesisBlock() {
 	const version = getVersion()
