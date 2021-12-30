@@ -38,6 +38,7 @@ function connectToPeers(newPeers){
     newPeers.forEach(
         (peer)=>{
             const ws = new WebSocket(peer)
+            ws.on
             ws.on("open", ()=>{ 
                 initConnection(ws); 
             })

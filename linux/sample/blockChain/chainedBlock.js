@@ -26,10 +26,6 @@ function getVersion() {
 	return JSON.parse(package).version
 }
 
-//getVersion()
-
-console.log(12)
-
 function createGenesisBlock() {
 	const version = getVersion()
 	const previousHash = '0'.repeat(64)
