@@ -1,8 +1,7 @@
 const p2p_port = process.env.P2P_PORT || 6001
 
 const WebSocket = require("ws");
-const { getLastBlock, getBlocks, createHash } = require("./chainedBlock");
-const { addBlock } = require("./checkValidBlock");
+const { getLastBlock, getBlocks } = require("./chainedBlock");
 
 function initP2PServer(test_port){
     const server = new WebSocket.Server({port:test_port})
@@ -16,9 +15,7 @@ initP2PServer(6003)
 let sockets = []
 
 function initConnection(ws){
-    sockets.push(ws) 
-    initMessageHandler(ws)
-    initErrorHandler(ws)
+    sockets.push(ws)
 }
 
 function getSockets(){
@@ -91,35 +88,8 @@ function responseAllChainMsg() {
     })
 }
 
-function handleBlockChainResponse(message){
-    const receiveBlocks = JSON.parse(message.data)
-    const latestReceiveBlock = receiveBlocks[receiveBlocks.length - 1]
-    const latestMyBlock = getLastBlock()
+function handleBlockChainResponse(){
 
-    // 데이터로 받은 블럭 중에 마지막 블럭의 인덱스가 
-    // 내가 보유 중인 마지막 블럭의 인덱스보다 클 때 / 작을 때
-    if (latestReceiveBlock.header.index > latestMyBlock.header.index){
-        // 받은 마지막 블록의 이전 해시 값이 내 마지막 블럭일 때 
-        if (createHash(latestMyBlock)===latestReceiveBlock.header.previousHash){
-            if (addBlock(latestReceiveBlock)){
-                broadcast(responseLatestMsg())
-            }
-            else {
-                console.log("Invalid Block!")
-            }
-        }
-
-        // 받은 블록의 전체 크기가 1일 때
-        else if (receiveBlocks.length===1){
-            broadcast(queryAllMsg())
-        }
-        else {
-            replaceChain(receiveBlocks)
-        }
-    } 
-    else{
-        console.log("My block is longer than You! Do nothing!")
-    }
 }
 
 function queryAllMsg(){
@@ -134,16 +104,6 @@ function queryLatestMsg(){
         "type": QUERY_LATEST,
         "data": null,
     })
-}
-
-function initErrorHandler(ws){
-    ws.on("close", ()=>{ closeConnection(ws); } )
-    ws.on("error", ()=>{ closeConnection(ws); } )
-}
-
-function closeConnection(ws){
-    console.log(`Connection close ${ws.url}`)
-    sockets.splice(sockets.indexOf(ws), 1)
 }
 
 module.exports = {getSockets,connectToPeers}
