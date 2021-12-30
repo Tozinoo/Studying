@@ -9,6 +9,7 @@ class Block{
 	}
 }
 
+// 블록 헤더 구조
 class BlockHeader {
 	constructor (version, previousHash, timestamp, merkleRoot, bit, nonce){
 		this.version = version
