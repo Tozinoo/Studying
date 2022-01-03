@@ -10,13 +10,13 @@ class Block{
 }
 
 class BlockHeader {
-	constructor (version, index, previousHash, timestamp, merkleRoot, bit, nonce){
+	constructor (version, index, previousHash, timestamp, merkleRoot, difficulty, nonce){
 		this.version = version
 		this.index = index
 		this.previousHash = previousHash
 		this.timestamp = timestamp
 		this.merkleRoot = merkleRoot
-		this.bit = bit
+		this.difficulty = difficulty
 		this.nonce = nonce
 	}
 }
@@ -33,13 +33,14 @@ function createGenesisBlock() {
 	const body = ['hello block']
 	const tree = merkle('sha256').sync(body)
 	const merkleRoot = tree.root() || '0'.repeat(64)
-	const bit = 0
+	const difficulty = 0
 	const nonce = 0
 	const index = 0
 
-	const header = new BlockHeader(version, index, previousHash, timestamp, merkleRoot, bit, nonce)
+	const header = new BlockHeader(version, index, previousHash, timestamp, merkleRoot, difficulty, nonce)
 	return new Block(header, body)
 }
+
 
 let Blocks = [createGenesisBlock()]
 
@@ -52,8 +53,8 @@ function getLastBlock(){
 }
 
 function createHash(data){
-	const {version,index, previousHash, timestamp, merkleRoot, bit, nonce} = data.header
-	const blockString = version + index + previousHash + timestamp + merkleRoot + bit + nonce
+	const {version,index, previousHash, timestamp, merkleRoot, difficulty, nonce} = data.header
+	const blockString = version + index + previousHash + timestamp + merkleRoot + difficulty + nonce
 	const hash = cryptojs.SHA256(blockString).toString()
 	return hash
 }
@@ -72,10 +73,10 @@ function nextBlock(bodyData){
 	const timestamp = parseInt(Date.now() / 1000)
 	const tree = merkle('sha256').sync(bodyData)
 	const merkleRoot = tree.root() || '0'.repeat(64)
-	const bit = 0
+	const difficulty = 0
 	const nonce = 0
 	
-	const header = new BlockHeader(version, index, previousHash, timestamp, merkleRoot, bit, nonce)
+	const header = new BlockHeader(version, index, previousHash, timestamp, merkleRoot, difficulty, nonce)
 	return new Block(header, bodyData)
 }
 
