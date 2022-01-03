@@ -59,6 +59,12 @@ function createHash(data){
 	return hash
 }
 
+function calculateHash(version,index, previousHash, timestamp, merkleRoot, difficulty, nonce){
+	const blockString = version + index + previousHash + timestamp + merkleRoot + difficulty + nonce
+	const hash = cryptojs.SHA256(blockString).toString()
+	return hash
+}
+
 const block = createGenesisBlock()
 //const testHash = createHash(block)
 //console.log("testHash",block)
@@ -74,9 +80,9 @@ function nextBlock(bodyData){
 	const tree = merkle('sha256').sync(bodyData)
 	const merkleRoot = tree.root() || '0'.repeat(64)
 	const difficulty = 0
-	const nonce = 0
+	//const nonce = 0
 	
-	const header = new BlockHeader(version, index, previousHash, timestamp, merkleRoot, difficulty, nonce)
+	const header = findBlock(version, index,previousHash, timestamp, merkleRoot, difficulty)
 	return new Block(header, bodyData)
 }
 
@@ -126,12 +132,12 @@ function findBlock(currentVersion, nextIndex, previousHash, nextTimestamp, merkl
 	var nonce = 0;
 
 	while(true){
-		var hash = createHash(currentVersion, nextIndex, previousHash, nextTimestamp, merkleRoot, difficulty, nonce)
+		var hash = calculateHash(currentVersion, nextIndex, previousHash, nextTimestamp, merkleRoot, difficulty, nonce)
 
 		if (hashMatchesDifficulty(hash,difficulty)){
 			return new BlockHeader(currentVersion, nextIndex, previousHash, nextTimestamp, merkleRoot, difficulty, nonce)
 		}
-		
+
 		nonce++;
 	}
 }
