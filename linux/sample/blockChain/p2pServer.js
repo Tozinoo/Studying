@@ -1,4 +1,4 @@
-const p2p_port = process.env.P2P_PORT || 6001
+// p2pServer.js
 
 // p2pServer.js의 replaceChain부터 만들어보자
 // 가장 긴 체인(가장 최신의 원장)을 찾아서 
