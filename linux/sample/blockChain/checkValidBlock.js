@@ -5,7 +5,7 @@
 
 // const {getLastBlock,createHash,createGenesisBlock,nextBlock} =require('./chainedBlock')
 const merkle = require('merkle')
-const {Blocks,getLastBlock,createHash} = require('./chainedBlock')
+const {Blocks,getLastBlock,createHash,isValidTimeStamp, hashMatchesDifficulty} = require('./chainedBlock')
 
 function isValidBlockStructure(block){
 	return typeof(block.header.version) === 'string' 
@@ -13,6 +13,8 @@ function isValidBlockStructure(block){
 			&& typeof(block.header.previousHash) ==='string'
 			&& typeof(block.header.timestamp) ==='number'
 			&& typeof(block.header.merkleRoot) ==='string'
+			&& typeof(block.header.difficulty) ==='number'
+			&& typeof(block.header.nonce) ==='number'
 			&& typeof(block.body) ==='object'
 }
 
@@ -35,6 +37,16 @@ function isValidNewBlock(newBlock, previousBlock){
 				console.log('Invalid merkleRoot')
 				return false;
 			}
+	// 유효하지 않은 타임 스탬프
+	else if (!isValidTimeStamp(newBlock, previousBlock)){
+		console.log("Invalid TimeStamp")
+		return false;
+	}
+	// 유효하지 않은 해시
+	else if (!hashMatchesDifficulty(createHash(newBlock),newBlock.header.difficulty)){
+		console.log("Invalid hash")
+		return false;
+	}
 	return true;
 }
 // let Blocks = [createGenesisBlock()]

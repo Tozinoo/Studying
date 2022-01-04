@@ -3,13 +3,15 @@ const bodyParser = require('body-parser')
 const {getVersion,nextBlock,getBlocks} = require('./chainedBlock')
 const {addBlock} = require('./checkValidBlock')
 const {connectToPeers,getSockets}=require('./p2pServer')
+const { getPublicKeyFromWallet } = require('./encryption')
 
 // export http_port=3001
 // env | grep http_port
 
 const http_port = process.env.HTTP_PORT || 3001
+const http_port2 = process.env.HTTP_PORT || 3002
 
-function initHttpServer(){
+function initHttpServer(port){
     const app = express()
     app.use(bodyParser.json())
 
@@ -61,10 +63,21 @@ function initHttpServer(){
     })
     // curl -X POST http://localhost:3001/stop
 
-    app.listen(http_port, ()=>{
-        console.log("Listening Http Port : ", http_port)
+    app.get("/address",(req,res)=>{
+        const address = getPublicKeyFromWallet().toString();
+        if(address != ""){
+            res.send({"address":address})
+        }
+        else {
+            res.send("empty address!")
+        }
+    })
+
+    app.listen(port, ()=>{
+        console.log("Listening Http Port : ", port)
     })
 }
 
-initHttpServer()
+initHttpServer(http_port)
+initHttpServer(http_port2)
 

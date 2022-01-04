@@ -4,7 +4,7 @@ const p2p_port = process.env.P2P_PORT || 6001
 // 가장 긴 체인(가장 최신의 원장)을 찾아서 
 
 const WebSocket = require("ws");
-const { getLastBlock, getBlocks, createHash, Blocks } = require("./chainedBlock");
+const { getLastBlock, getBlocks, createHash, Blocks, replaceChain } = require("./chainedBlock");
 const { addBlock } = require("./checkValidBlock");
 
 function initP2PServer(test_port){
@@ -13,7 +13,7 @@ function initP2PServer(test_port){
     console.log("Listening webSocket port : " + test_port)
 }
 initP2PServer(6001)
-initP2PServer(6002)
+initP2PServer(6002) 
 initP2PServer(6003)
 
 let sockets = []
@@ -38,19 +38,6 @@ function broadcast(message){
             write(socket, message);
         }
     )
-}
-
-function replaceChain(newBlocks){
-    //우선 유효성 검사부터
-    if (isValidChain(newBlocks)) {
-        if ((newBlocks.length > Blocks.length) || (newBlocks.length === Blocks.length) && random.boolean()){
-            Blocks=newBlocks
-            broadcast(responseLatestMsg());
-        }
-        else{
-            console.log("받은 원장에 문제가 있음")    
-        }
-    }
 }
 
 function connectToPeers(newPeers){
