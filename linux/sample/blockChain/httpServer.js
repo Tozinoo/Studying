@@ -48,7 +48,7 @@ function initHttpServer(){
         addBlock(block)
         res.send(block)
     })
-    //curl -H "Content-type: application/json" --data "{\"data\":[\"Anything1\",\"Anything2\"]}" -X POST http://localhost:3001/mineBlock
+    // curl -H "Content-type: application/json" --data "{\"data\":[\"Anything1\",\"Anything2\"]}" -X POST http://localhost:3001/mineBlock
     // -H 옵션이 있기때문에 -X POST 빼도 상관없음
 
     app.get("/version",(req,res)=>{

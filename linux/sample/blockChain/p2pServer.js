@@ -41,16 +41,15 @@ function broadcast(message){
 }
 
 function replaceChain(newBlocks){
-          //우선 유효성 검사부터
-   if (isValidChain(newBlocks)) {
-        if ((newBlocks.length > Blocks.length) ||
-       (newBlocks.length === Blocks.length) && random.boolean()){
-           Blocks=newBlocks
+    //우선 유효성 검사부터
+    if (isValidChain(newBlocks)) {
+        if ((newBlocks.length > Blocks.length) || (newBlocks.length === Blocks.length) && random.boolean()){
+            Blocks=newBlocks
             broadcast(responseLatestMsg());
-       }
-       else{
+        }
+        else{
             console.log("받은 원장에 문제가 있음")    
-       }
+        }
     }
 }
 
