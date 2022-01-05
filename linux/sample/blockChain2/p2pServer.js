@@ -8,9 +8,9 @@ function initP2PServer(test_port){
     server.on("connection",(ws)=>{initConnection(ws);})
     console.log("Listening webSocket port : " + test_port)
 }
-initP2PServer(6001)
-initP2PServer(6002)
-initP2PServer(6003)
+initP2PServer(6004)
+initP2PServer(6005)
+initP2PServer(6006)
 
 let sockets = []
 

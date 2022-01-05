@@ -9,7 +9,7 @@ const { getPublicKeyFromWallet } = require('./encryption')
 // env | grep http_port
 
 const http_port = process.env.HTTP_PORT || 3001
-const http_port2 = process.env.HTTP_PORT || 3002
+// const http_port2 = process.env.HTTP_PORT || 3002
 
 function initHttpServer(port){
     const app = express()
@@ -79,5 +79,5 @@ function initHttpServer(port){
 }
 
 initHttpServer(http_port)
-initHttpServer(http_port2)
+
 

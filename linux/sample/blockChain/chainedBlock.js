@@ -39,7 +39,7 @@ function createGenesisBlock() {
 	const body = ['The Times 03/Jan/2009 Chancellor on brink of second bailout for banks']
 	const tree = merkle('sha256').sync(body)
 	const merkleRoot = tree.root() || '0'.repeat(64)
-	const difficulty = 0
+	const difficulty = 1
 	const nonce = 0
 	const index = 0
 
@@ -85,7 +85,7 @@ function nextBlock(bodyData){
 	const timestamp = parseInt(Date.now() / 1000)
 	const tree = merkle('sha256').sync(bodyData)
 	const merkleRoot = tree.root() || '0'.repeat(64)
-	const difficulty = 0
+	const difficulty = getDifficulty(Blocks)
 	//const nonce = 0
 	
 	const header = findBlock(version, index,previousHash, timestamp, merkleRoot, difficulty)
@@ -130,6 +130,7 @@ function hexToBinary(s){
 
 function hashMatchesDifficulty(hash, difficulty){
 	const hashBinary = hexToBinary(hash.toUpperCase())
+	// console.log(hashBinary)
 	const requirePrefix = '0'.repeat(difficulty)
 	return hashBinary.startsWith(requirePrefix)
 }
@@ -141,7 +142,12 @@ function findBlock(currentVersion, nextIndex, previousHash, nextTimestamp, merkl
 		var hash = calculateHash(currentVersion, nextIndex, previousHash, nextTimestamp, merkleRoot, difficulty, nonce)
 
 		if (hashMatchesDifficulty(hash,difficulty)){
+			const hashBinary = hexToBinary(hash.toUpperCase())
+			console.log("difficulty : "+ difficulty)
+			console.log("nonce : "+ nonce)
+			console.log("hash : " + hashBinary)
 			return new BlockHeader(currentVersion, nextIndex, previousHash, nextTimestamp, merkleRoot, difficulty, nonce)
+
 		}
 
 		nonce++;
@@ -184,11 +190,8 @@ function getCurrentTimeStamp(){
 
 function isValidTimeStamp(newBlock, prevBlock){
 	// 새로운 블럭의 생성 시간 - 이전 블럭의 생성시간 값이 60초보다 작을 때
-	if (newBlock.header.timestamp - prevBlock.header.timestamp < 60) return false;
-	console.log ( "getCurrent : " + getCurrentTimeStamp() + " newBlock : ", newBlock.header.timestamp)
-	console.log (getCurrentTimeStamp() - prevBlock.header.timestamp )
-	if (getCurrentTimeStamp() - prevBlock.header.timestamp < 60 ) return false;
-	console.log(22)
+	if (newBlock.header.timestamp - prevBlock.header.timestamp < 1) return false;
+	if (getCurrentTimeStamp() - prevBlock.header.timestamp < 1 ) return false;
 	return true;
 }
 

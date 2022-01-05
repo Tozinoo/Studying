@@ -16,6 +16,7 @@ initP2PServer(6001)
 initP2PServer(6002) 
 initP2PServer(6003)
 
+
 let sockets = []
 
 function initConnection(ws){
