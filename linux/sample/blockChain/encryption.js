@@ -20,7 +20,6 @@ function initWallet() {
     fs.writeFileSync(privateKeyFile, newPrivateKey)
     console.log("새로운 지갑 생성 private key 경로 :  " + privateKeyFile)
 }
-initWallet()
 
 function generatePrivateKey(){
     const keyPair = ec.genKeyPair();
@@ -38,5 +37,7 @@ function getPublicKeyFromWallet(){
     const key = ec.keyFromPrivate(privateKey,"hex");
     return key.getPublic().encode("hex")
 }
+
+initWallet()
 
 module.exports={getPublicKeyFromWallet}
