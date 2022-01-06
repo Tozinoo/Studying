@@ -71,7 +71,7 @@ function calculateHash(version,index, previousHash, timestamp, merkleRoot, diffi
 	return hash
 }
 
-const block = createGenesisBlock()
+//const block = createGenesisBlock()
 //const testHash = createHash(block)
 //console.log("testHash",block)
 
@@ -130,7 +130,6 @@ function hexToBinary(s){
 
 function hashMatchesDifficulty(hash, difficulty){
 	const hashBinary = hexToBinary(hash.toUpperCase())
-	// console.log(hashBinary)
 	const requirePrefix = '0'.repeat(difficulty)
 	return hashBinary.startsWith(requirePrefix)
 }
@@ -147,7 +146,6 @@ function findBlock(currentVersion, nextIndex, previousHash, nextTimestamp, merkl
 			console.log("nonce : "+ nonce)
 			console.log("hash : " + hashBinary)
 			return new BlockHeader(currentVersion, nextIndex, previousHash, nextTimestamp, merkleRoot, difficulty, nonce)
-
 		}
 
 		nonce++;
