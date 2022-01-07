@@ -1,0 +1,24 @@
+{
+    "name": "make_naivecoin",
+    "version": 36,
+    "description": "",
+    "main": "index.js",
+    "scripts": {
+        "test": "echo \"Error: no test specified\" && exit 1"
+    },
+    "keywords": [],
+    "author": "",
+    "license": "ISC",
+    "dependencies": {
+        "crypto-js": "4.1.1",
+        "fs": "0.0.1-security",
+        "merkle": "0.6.0",
+        "merkletreejs": "0.2.27",
+        "tsc": "2.0.3"
+    },
+    "devDependencies": {
+        "@types/crypto-js": "4.1.0",
+        "ts-node": "10.4.0",
+        "typescript": "4.5.4"
+    }
+}
