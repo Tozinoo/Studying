@@ -2,11 +2,14 @@
 exports.__esModule = true;
 var bodyParser = require("body-parser");
 var express = require("express");
+var morgan = require("morgan");
 var block_1 = require("./block");
+var p2p_1 = require("./p2p");
 var httpPort = parseInt(process.env.HTTP_PORT) || 3001;
 var p2pPort = parseInt(process.env.P2P_PORT) || 6001;
 var initHttpServer = function (myHttpPort) {
     var app = express();
+    app.use(morgan("dev"));
     app.use(bodyParser.json());
     app.get("/", function (req, res) {
         res.send({ welcome: "welcome" });
@@ -23,3 +26,4 @@ var initHttpServer = function (myHttpPort) {
     });
 };
 initHttpServer(httpPort);
+(0, p2p_1.initP2PServer)(p2pPort);

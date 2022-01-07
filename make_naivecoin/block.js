@@ -20,10 +20,15 @@ var Block = /** @class */ (function () {
     return Block;
 }());
 exports.Block = Block;
+// in seconds
+var BLOCK_GENERATION_INTERVAL = 10;
+// in blocks
+var NBITS_ADJUSTMENT_INTERVAL = 10;
 // get version from package.json
 var getVersion = function () {
     var version = fs.readFileSync("package.json");
-    return JSON.parse(version).version;
+    var versionToInt = JSON.parse(version).version;
+    return parseInt(versionToInt);
 };
 // calculate Hash from block's header data
 var calculateHash = function (version, previousBlockHeaderHash, merklerootHash, time, nbits, nonce) {
@@ -66,10 +71,8 @@ var generateNextBlock = function (blockData) {
     var nextHeight = previousBlock.height + 1;
     var nextMerklerootHash = makeMerkleRoot(blockData);
     var nextTime = Math.round(new Date().getTime() / 1000);
-    var nextnBits = 1;
-    var nextNonce = 1;
-    var nextHash = calculateHash(version, previousBlock.hash, nextMerklerootHash, nextTime, nextnBits, nextNonce);
-    var newBlock = new Block(nextHeight, nextHash, version, previousBlock.hash, nextMerklerootHash, nextTime, nextnBits, nextNonce, blockData);
+    var nextnBits = getnBits(getBlockchain());
+    var newBlock = findBlock(nextHeight, version, previousBlock.hash, nextMerklerootHash, nextTime, nextnBits, blockData);
     addBlockToChain(newBlock);
     return newBlock;
 };
@@ -142,6 +145,47 @@ var replaceChain = function (newBlockChains) {
     }
     else {
         console.log("Received blockchain invalid!");
+    }
+};
+var hashMatchesnBits = function (hash, nbits) {
+    var requiredPrefix = "0".repeat(nbits);
+    return hash.startsWith(requiredPrefix);
+};
+var findBlock = function (nextHeight, version, previousBlockHeaderHash, merklerootHash, time, nbits, blockData) {
+    var nonce = 0;
+    while (true) {
+        var hash = calculateHash(version, previousBlockHeaderHash, merklerootHash, time, nbits, nonce);
+        if (hashMatchesnBits(hash, nbits)) {
+            return new Block(nextHeight, hash, version, previousBlockHeaderHash, merklerootHash, time, nbits, nonce, blockData);
+        }
+        nonce++;
+    }
+};
+var getnBits = function (aBlockChain) {
+    var latestBlock = aBlockChain[aBlockChain.length - 1];
+    if (latestBlock.height % BLOCK_GENERATION_INTERVAL === 0 &&
+        latestBlock.height !== 0) {
+        return getAdjustednBits(latestBlock, aBlockChain);
+    }
+    else {
+        return latestBlock.nbits;
+    }
+};
+var getAdjustednBits = function (latestBlock, aBlockChain) {
+    if (aBlockChain.length <= 10) {
+        return latestBlock.nbits;
+    }
+    var prevAdjustmentBlock = aBlockChain[aBlockChain.length - 10];
+    var timeExpected = BLOCK_GENERATION_INTERVAL * NBITS_ADJUSTMENT_INTERVAL;
+    var timeTaken = latestBlock.time - prevAdjustmentBlock.time;
+    if (timeTaken < timeExpected / 2) {
+        return prevAdjustmentBlock.nbits + 1;
+    }
+    else if (timeTaken > timeExpected * 2) {
+        return prevAdjustmentBlock.nbits - 1;
+    }
+    else {
+        return prevAdjustmentBlock.nbits;
     }
 };
 console.log(getBlockchain());

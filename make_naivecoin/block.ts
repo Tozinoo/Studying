@@ -39,6 +39,11 @@ class Block {
     }
 }
 
+// in seconds
+const BLOCK_GENERATION_INTERVAL: number = 10;
+// in blocks
+const NBITS_ADJUSTMENT_INTERVAL: number = 10;
+
 // get version from package.json
 const getVersion = (): number => {
     const version: any = fs.readFileSync("package.json");
@@ -120,26 +125,15 @@ const generateNextBlock = (blockData: string[]): Block => {
     const nextHeight: number = previousBlock.height + 1;
     const nextMerklerootHash: string = makeMerkleRoot(blockData);
     const nextTime: number = Math.round(new Date().getTime() / 1000);
-    const nextnBits: number = 1;
-    const nextNonce: number = 1;
-    const nextHash: string = calculateHash(
-        version,
-        previousBlock.hash,
-        nextMerklerootHash,
-        nextTime,
-        nextnBits,
-        nextNonce
-    );
+    const nextnBits: number = getnBits(getBlockchain());
 
-    const newBlock: Block = new Block(
+    const newBlock: Block = findBlock(
         nextHeight,
-        nextHash,
         version,
         previousBlock.hash,
         nextMerklerootHash,
         nextTime,
         nextnBits,
-        nextNonce,
         blockData
     );
     addBlockToChain(newBlock);
@@ -225,6 +219,76 @@ const replaceChain = (newBlockChains: Block[]) => {
         blockchain = newBlockChains;
     } else {
         console.log("Received blockchain invalid!");
+    }
+};
+
+const hashMatchesnBits = (hash: string, nbits: number): boolean => {
+    const requiredPrefix: string = "0".repeat(nbits);
+    return hash.startsWith(requiredPrefix);
+};
+
+const findBlock = (
+    nextHeight: number,
+    version: number,
+    previousBlockHeaderHash: string,
+    merklerootHash: string,
+    time: number,
+    nbits: number,
+    blockData: string[]
+): Block => {
+    let nonce = 0;
+    while (true) {
+        const hash: string = calculateHash(
+            version,
+            previousBlockHeaderHash,
+            merklerootHash,
+            time,
+            nbits,
+            nonce
+        );
+        if (hashMatchesnBits(hash, nbits)) {
+            return new Block(
+                nextHeight,
+                hash,
+                version,
+                previousBlockHeaderHash,
+                merklerootHash,
+                time,
+                nbits,
+                nonce,
+                blockData
+            );
+        }
+        nonce++;
+    }
+};
+
+const getnBits = (aBlockChain: Block[]): number => {
+    const latestBlock: Block = aBlockChain[aBlockChain.length - 1];
+    if (
+        latestBlock.height % BLOCK_GENERATION_INTERVAL === 0 &&
+        latestBlock.height !== 0
+    ) {
+        return getAdjustednBits(latestBlock, aBlockChain);
+    } else {
+        return latestBlock.nbits;
+    }
+};
+
+const getAdjustednBits = (latestBlock: Block, aBlockChain: Block[]): number => {
+    if (aBlockChain.length <= 10) {
+        return latestBlock.nbits;
+    }
+    const prevAdjustmentBlock: Block = aBlockChain[aBlockChain.length - 10];
+    const timeExpected: number =
+        BLOCK_GENERATION_INTERVAL * NBITS_ADJUSTMENT_INTERVAL;
+    const timeTaken: number = latestBlock.time - prevAdjustmentBlock.time;
+    if (timeTaken < timeExpected / 2) {
+        return prevAdjustmentBlock.nbits + 1;
+    } else if (timeTaken > timeExpected * 2) {
+        return prevAdjustmentBlock.nbits - 1;
+    } else {
+        return prevAdjustmentBlock.nbits;
     }
 };
 
