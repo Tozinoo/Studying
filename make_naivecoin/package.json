@@ -2,7 +2,7 @@
     "name": "make_naivecoin",
     "version": 36,
     "description": "",
-    "main": "index.js",
+    "main": "main.js",
     "scripts": {
         "test": "echo \"Error: no test specified\" && exit 1"
     },
@@ -10,11 +10,14 @@
     "author": "",
     "license": "ISC",
     "dependencies": {
+        "body-parser": "1.19.1",
         "crypto-js": "4.1.1",
+        "express": "4.17.2",
         "fs": "0.0.1-security",
         "merkle": "0.6.0",
         "merkletreejs": "0.2.27",
-        "tsc": "2.0.3"
+        "tsc": "2.0.3",
+        "ws": "8.4.0"
     },
     "devDependencies": {
         "@types/crypto-js": "4.1.0",

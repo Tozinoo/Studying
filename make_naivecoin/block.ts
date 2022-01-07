@@ -141,6 +141,7 @@ const generateNextBlock = (blockData: string[]): Block => {
         nextNonce,
         blockData
     );
+    addBlockToChain(newBlock);
 
     return newBlock;
 };
@@ -188,8 +189,7 @@ const isValidNewBlock = (newBlock: Block, previousBlock: Block) => {
 };
 
 // add block to blockchain
-const addBlockToChain = (bodyData: string[]) => {
-    const newBlock: Block = generateNextBlock(bodyData);
+const addBlockToChain = (newBlock: Block) => {
     if (isValidNewBlock(newBlock, getLatestBlock())) {
         blockchain.push(newBlock);
     }
@@ -228,3 +228,5 @@ const replaceChain = (newBlockChains: Block[]) => {
 };
 
 console.log(getBlockchain());
+
+export { Block, getBlockchain, addBlockToChain, generateNextBlock };
