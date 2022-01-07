@@ -1,6 +1,6 @@
 {
     "name": "make_naivecoin",
-    "version": 36,
+    "version": "36",
     "description": "",
     "main": "main.js",
     "scripts": {

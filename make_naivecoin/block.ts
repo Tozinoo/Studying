@@ -42,7 +42,8 @@ class Block {
 // get version from package.json
 const getVersion = (): number => {
     const version: any = fs.readFileSync("package.json");
-    return JSON.parse(version).version;
+    const versionToInt: any = JSON.parse(version).version;
+    return parseInt(versionToInt);
 };
 
 // calculate Hash from block's header data
