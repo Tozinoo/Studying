@@ -178,8 +178,12 @@ const isValidNewBlock = (newBlock: Block, previousBlock: Block) => {
         return false;
     } else if (calculateHashForBlock(newBlock) !== newBlock.hash) {
         console.log("Invalid hash");
+        return false;
+    } else if (!isValidTime(newBlock, previousBlock)) {
+        console.log("n:", newBlock.time, "p:", previousBlock.time);
+        console.log("Invalid Time");
+        return false;
     }
-
     return true;
 };
 
@@ -290,6 +294,13 @@ const getAdjustednBits = (latestBlock: Block, aBlockChain: Block[]): number => {
     } else {
         return prevAdjustmentBlock.nbits;
     }
+};
+
+const isValidTime = (newBlock: Block, prevBlock: Block): boolean => {
+    if (newBlock.time - prevBlock.time < 60) {
+        return false;
+    }
+    return true;
 };
 
 console.log(getBlockchain());
