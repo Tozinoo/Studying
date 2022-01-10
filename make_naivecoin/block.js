@@ -195,7 +195,7 @@ var getAdjustednBits = function (latestBlock, aBlockChain) {
     }
 };
 var isValidTime = function (newBlock, prevBlock) {
-    if (newBlock.time - prevBlock.time < 60) {
+    if (newBlock.time - prevBlock.time < 1) {
         return false;
     }
     return true;

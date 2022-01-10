@@ -297,7 +297,7 @@ const getAdjustednBits = (latestBlock: Block, aBlockChain: Block[]): number => {
 };
 
 const isValidTime = (newBlock: Block, prevBlock: Block): boolean => {
-    if (newBlock.time - prevBlock.time < 60) {
+    if (newBlock.time - prevBlock.time < 1) {
         return false;
     }
     return true;
