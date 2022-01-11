@@ -47,7 +47,6 @@ function createGenesisBlock() {
 	return new Block(header, body)
 }
 
-
 let Blocks = [createGenesisBlock()]
 
 function getBlocks(){
