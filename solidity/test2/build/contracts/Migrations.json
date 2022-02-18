@@ -50,7 +50,7 @@
   "sourceMap": "66:352:0:-;;;113:10;90:33;;;;;;;;;;;;;;;;;;;;66:352;8:9:-1;5:2;;;30:1;27;20:12;5:2;66:352:0;;;;;;;",
   "deployedSourceMap": "66:352:0:-;;;;8:9:-1;5:2;;;30:1;27;20:12;5:2;66:352:0;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;127:36;;;:::i;:::-;;;;;;;;;;;;;;;;;;;90:33;;;:::i;:::-;;;;;;;;;;;;;;;;;;;;;;;313:103;;;;;;13:2:-1;8:3;5:11;2:2;;;29:1;26;19:12;2:2;313:103:0;;;;;;;;;;;;;;;;;:::i;:::-;;127:36;;;;:::o;90:33::-;;;;;;;;;;;;;:::o;313:103::-;225:5;;;;;;;;;;;211:19;;:10;:19;;;196:101;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;402:9;375:24;:36;;;;313:103;:::o",
   "source": "// SPDX-License-Identifier: MIT\npragma solidity >=0.4.22 <0.9.0;\n\ncontract Migrations {\n  address public owner = msg.sender;\n  uint public last_completed_migration;\n\n  modifier restricted() {\n    require(\n      msg.sender == owner,\n      \"This function is restricted to the contract's owner\"\n    );\n    _;\n  }\n\n  function setCompleted(uint completed) public restricted {\n    last_completed_migration = completed;\n  }\n}\n",
-  "sourcePath": "C:\\Users\\최현석\\Documents\\GitHub\\Studying\\solidity\\smartcontract\\contracts\\Migrations.sol",
+  "sourcePath": "C:\\Users\\최현석\\Documents\\GitHub\\Studying\\solidity\\test2\\contracts\\Migrations.sol",
   "ast": {
     "absolutePath": "project:/contracts/Migrations.sol",
     "exportedSymbols": {
@@ -120,7 +120,7 @@
                 "name": "msg",
                 "nodeType": "Identifier",
                 "overloadedDeclarations": [],
-                "referencedDeclaration": 91,
+                "referencedDeclaration": 69,
                 "src": "113:3:0",
                 "typeDescriptions": {
                   "typeIdentifier": "t_magic_message",
@@ -198,7 +198,7 @@
                             "name": "msg",
                             "nodeType": "Identifier",
                             "overloadedDeclarations": [],
-                            "referencedDeclaration": 91,
+                            "referencedDeclaration": 69,
                             "src": "211:3:0",
                             "typeDescriptions": {
                               "typeIdentifier": "t_magic_message",
@@ -274,10 +274,10 @@
                       "name": "require",
                       "nodeType": "Identifier",
                       "overloadedDeclarations": [
-                        94,
-                        95
+                        72,
+                        73
                       ],
-                      "referencedDeclaration": 95,
+                      "referencedDeclaration": 73,
                       "src": "196:7:0",
                       "typeDescriptions": {
                         "typeIdentifier": "t_function_require_pure$_t_bool_$_t_string_memory_ptr_$returns$__$",
@@ -538,7 +538,7 @@
                       "overloadedDeclarations": [
                         null
                       ],
-                      "referencedDeclaration": 91,
+                      "referencedDeclaration": 69,
                       "type": "msg",
                       "value": "msg"
                     },
@@ -632,10 +632,10 @@
                                 }
                               ],
                               "overloadedDeclarations": [
-                                94,
-                                95
+                                72,
+                                73
                               ],
-                              "referencedDeclaration": 95,
+                              "referencedDeclaration": 73,
                               "type": "function (bool,string memory) pure",
                               "value": "require"
                             },
@@ -676,7 +676,7 @@
                                       "overloadedDeclarations": [
                                         null
                                       ],
-                                      "referencedDeclaration": 91,
+                                      "referencedDeclaration": 69,
                                       "type": "msg",
                                       "value": "msg"
                                     },
@@ -909,21 +909,15 @@
     "version": "0.5.2+commit.1df8f40c.Emscripten.clang"
   },
   "networks": {
-    "1644453587749": {
+    "1645114014720": {
       "events": {},
       "links": {},
-      "address": "0x240d42037bD0fCdB20dfe4AA5240AA7905CfDaFC",
-      "transactionHash": "0xc55e3d7ac7527e0dcd0776f78abbbb2e7cf8031e83104468ad76aad6e7ce848a"
-    },
-    "1645107496610": {
-      "events": {},
-      "links": {},
-      "address": "0x03DF6A76C83CB8C320eAbB6fE0788FFF4798Ad67",
-      "transactionHash": "0x7eda25381b7a86d6da8471c6f1c54cab81976369d08bfbbe67f629c47eb55621"
+      "address": "0xAb3abCB878Da55420980730eE6a88B9BEe10cfE9",
+      "transactionHash": "0xfd3356efeff3895ce7dbfc5992a8b9cf3e6d2e1da9243d7ce9833dcb2402dfa7"
     }
   },
   "schemaVersion": "3.4.4",
-  "updatedAt": "2022-02-17T14:26:58.867Z",
+  "updatedAt": "2022-02-17T16:07:10.481Z",
   "networkType": "ethereum",
   "devdoc": {
     "methods": {}

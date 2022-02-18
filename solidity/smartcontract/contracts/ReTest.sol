@@ -1,7 +1,7 @@
-pragma solidity >=0.4.2 <0.9.0; // solidity 0.5.2 버전을 사용
+pragma solidity ^0.5.2; // solidity 0.5.2 버전을 사용
 
 
-contract TEST { // contract 이름을 TEST로 지정 
+contract RETEST { // contract 이름을 TEST로 지정 
     string public constant name = "TEST token"; // 토큰의 이름은 TEST token 
     string public constant symbol = "TEST"; // TEST라는 이름을 사용 
     uint public constant decimals = 18; // 소수점 18자리까지 사용하겠음 

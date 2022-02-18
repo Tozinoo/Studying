@@ -1,4 +1,4 @@
-pragma solidity >=0.4.2 <0.9.0; // solidity 0.5.2 버전을 사용
+pragma solidity ^0.5.2; // solidity 0.5.2 버전을 사용
 
 
 contract TEST { // contract 이름을 TEST로 지정 
